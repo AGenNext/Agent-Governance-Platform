@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AGenNext Governance App</title>
+  <style>
+    body { margin: 0; font-family: Inter, Arial, sans-serif; background: #020617; color: #e5e7eb; }
+    .layout { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+    aside { background: #0f172a; border-right: 1px solid #1e293b; padding: 24px; }
+    main { padding: 32px; }
+    .brand { font-size: 22px; font-weight: 800; margin-bottom: 28px; }
+    nav a { display: block; color: #cbd5e1; text-decoration: none; padding: 12px 14px; border-radius: 10px; margin-bottom: 6px; }
+    nav a.active, nav a:hover { background: #1d4ed8; color: white; }
+    h1 { margin-top: 0; font-size: 38px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+    .card { background: #0f172a; border: 1px solid #1e293b; border-radius: 18px; padding: 22px; }
+    .metric { font-size: 34px; font-weight: 800; }
+    .muted { color: #94a3b8; }
+    .pill { display: inline-block; padding: 5px 10px; border-radius: 999px; background: #1e293b; color: #cbd5e1; font-size: 12px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 14px; }
+    th, td { text-align: left; padding: 14px; border-bottom: 1px solid #1e293b; }
+    th { color: #94a3b8; font-size: 13px; }
+    .critical { color: #fca5a5; }
+    .high { color: #fdba74; }
+    .good { color: #86efac; }
+    @media (max-width: 800px) { .layout { grid-template-columns: 1fr; } aside { position: static; } }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside>
+      <div class="brand">AGenNext</div>
+      <nav>
+        <a class="active" href="#overview">Overview</a>
+        <a href="#fabric">Agent Fabric</a>
+        <a href="#risk">Risk Score</a>
+        <a href="#access">Access Reviews</a>
+        <a href="#trace">Agent Trace</a>
+        <a href="#vault">Agent Vault</a>
+        <a href="#security">Security Findings</a>
+      </nav>
+    </aside>
+    <main>
+      <section id="overview">
+        <h1>Agent Governance Dashboard</h1>
+        <p class="muted">Unified visibility into autonomous agent access, trust, risk, secrets, threats, and runtime evidence.</p>
+        <div class="grid">
+          <div class="card"><div class="metric">1,248</div><p class="muted">Agents Discovered</p></div>
+          <div class="card"><div class="metric">342</div><p class="muted">High-Risk Agents</p></div>
+          <div class="card"><div class="metric">86</div><p class="muted">Critical Agent Paths</p></div>
+          <div class="card"><div class="metric">99.98%</div><p class="muted">Trace Coverage</p></div>
+        </div>
+      </section>
+
+      <section id="risk" class="card" style="margin-top:28px;">
+        <h2>Top Agent Risk Scores</h2>
+        <table>
+          <tr><th>Agent</th><th>Owner</th><th>Risk</th><th>Primary Driver</th><th>Control</th></tr>
+          <tr><td>finance-analyst-04</td><td>Finance Ops</td><td class="critical">91 Critical</td><td>Payments + production secrets</td><td>Require approval</td></tr>
+          <tr><td>sales-copilot-17</td><td>Sales</td><td class="high">78 High</td><td>CRM PII + export attempts</td><td>Deny export</td></tr>
+          <tr><td>devops-agent-02</td><td>Platform</td><td class="high">74 High</td><td>GitHub write + CI secrets</td><td>Rotate token</td></tr>
+        </table>
+      </section>
+
+      <section id="fabric" class="card" style="margin-top:28px;">
+        <h2>Agent Fabric</h2>
+        <p class="muted">Agent → Group → Tool → Secret → Cloud App → Resource → Policy → Trace</p>
+        <p><span class="pill">OpenFGA relationships</span> <span class="pill">OPA policies</span> <span class="pill">AuthZEN decisions</span> <span class="pill">Vault secrets</span></p>
+      </section>
+
+      <section id="access" class="card" style="margin-top:28px;">
+        <h2>Access Reviews</h2>
+        <table>
+          <tr><th>Campaign</th><th>Scope</th><th>Status</th><th>Due</th></tr>
+          <tr><td>Q2 Production Agents</td><td>428 agents</td><td class="high">In Review</td><td>7 days</td></tr>
+          <tr><td>Critical Secrets Access</td><td>92 agents</td><td class="critical">Overdue</td><td>Now</td></tr>
+        </table>
+      </section>
+
+      <section id="trace" class="card" style="margin-top:28px;">
+        <h2>Recent Agent Trace Events</h2>
+        <table>
+          <tr><th>Time</th><th>Agent</th><th>Action</th><th>Decision</th><th>Evidence</th></tr>
+          <tr><td>10:34</td><td>sales-copilot-17</td><td>salesforce.get_account</td><td class="good">Allowed</td><td>Trace hash verified</td></tr>
+          <tr><td>10:41</td><td>finance-analyst-04</td><td>payments.create</td><td class="critical">Denied</td><td>Approval missing</td></tr>
+        </table>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
